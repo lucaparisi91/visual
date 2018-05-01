@@ -1,0 +1,13 @@
+#include "cube.h"
+
+cube::cube(float lx_,float ly_,float lz_)
+{
+  lx=lx_;
+  ly=ly_;
+  lz=lz_;
+}
+
+cube::generateVertices()
+{
+  
+}

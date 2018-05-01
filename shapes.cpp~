@@ -1,0 +1,26 @@
+#include "shapes.h"
+
+
+void shape::generateBuffers()
+{
+  // ------------------------------generate buffers
+    glGenVertexArrays(1,&VAOS);
+    glBindVertexArray(VAOS);
+    
+    // vertex elements
+    VBOS=generateBufferVertex3D(vertices,0);
+    
+    
+    // -----quads
+    
+    EBOS=generateElementArray3D(indices);
+    
+    //------------------colors
+
+    VBCS=generateBufferVertex3D(colors,1);
+    
+    // normals
+    
+    VBN=generateBufferVertex3D(normals,2);
+    
+}
