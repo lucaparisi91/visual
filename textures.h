@@ -5,7 +5,8 @@
 #include <cstdlib>
 #include "stb_image.h"
 #include <string>
-
+#include "errorTools.h"
+#include <iostream>
 using namespace std;
 
 class texture
@@ -29,12 +30,19 @@ public:
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
+    
   };
   
+  void bind()
+  {
+    glBindTexture(GL_TEXTURE_2D, id);
+    
+    
+  }
   int const getId(){return id;} ;
   
   ~texture(){stbi_image_free(data);}
-  
+ 
 public:
   unsigned int id;
   int width,height,nChannels;

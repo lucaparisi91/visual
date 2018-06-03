@@ -113,6 +113,11 @@ public:
     glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE,value);
   }
   
+  void setBool(string name,bool value) const
+  {
+    glUniform1i(glGetUniformLocation(id, name.c_str()), value);
+  }
+  
 };
 
 #endif

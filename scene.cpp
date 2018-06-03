@@ -14,6 +14,8 @@ scene::scene(string shaderVertexSource,string shaderFragmentSource) : cam1(glm::
   projection=glm::perspective(glm::radians(45.0f),(float)windowSpace::widthScreen/(float)windowSpace::heightScreen,0.1f,100.0f);
   view = cam1.getViewMatrix();
   
+  identity=glm::mat4(1.0f);
+  model=identity;
   baseProgram.use();
   
   setProgram(baseProgram);

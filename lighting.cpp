@@ -27,11 +27,16 @@ public:
   
   lightingScene(string shaderVertexSource,string shaderFragmentSource) : scene::scene(shaderVertexSource,shaderFragmentSource),mainSphere(100,100),lamp(100,100),lampProgram("lightingLampVertex.c","lightingLampFragment.c"),circle1(100,100),cylinder1(100,100)
   {
+    
+    texture *grassTexture=new texture("sand.jpg");
+    
     mainSphere.setColor(1.f,0.2f,0.3f);
     cylinder1.setColor(1.f,194/255.,45/255.);
     square1.setColor(48/255.,97./255.,21/255.);
     circle1.setColor(1,194/255.,45/255.);
+    square1.setTexture(*grassTexture);
     setProgram(lampProgram);
+    
     lamp.setColor(1.f,1.0f,1.f);
     setProgramDefault();
     getBaseProgram().setVec3("lightColor",1.f,1.f,0.f);
@@ -65,15 +70,17 @@ public:
   
   void draw()
   {
-    
+    glCheckError();
+    getBaseProgram().setBool("isTextured",false);
     view = getViewMatrixCamera();
     
     // draw lamp
-
+    
     model=glm::translate(identity,glm::vec3(0.0f,0.8*sin(getTime()),1.+0.6*cos(getTime()  )));
     model=glm::scale(model,glm::vec3(0.1f,0.1f,0.1f));
     setProgram(lampProgram);
     applyModelViewProjection();
+    lamp.bind();
     lamp.draw();
     
     setProgramDefault();
@@ -83,6 +90,7 @@ public:
     model=glm::translate(identity,glm::vec3(0.0f,0.3f,1.f));
     model=glm::scale(model,glm::vec3(0.3f,0.3f,0.3f));
     applyModelViewProjection();
+    mainSphere.bind();
     mainSphere.draw();
 
     
@@ -91,15 +99,20 @@ public:
     model=glm::rotate(model,(float)(M_PI/2.),glm::vec3(1.f,0.f,0.0f));
     model=glm::scale(model,glm::vec3(0.1f,0.1f,1.f));
     applyModelViewProjection();
+    cylinder1.bind();
     cylinder1.draw();
+    
     // square
-
+    //getBaseProgram().setBool("isTextured",true);
+    getBaseProgram().setBool("isTextured",true);
     model=glm::translate(identity,glm::vec3(0.0f,-0.5,0.f));
     model=glm::rotate(model,(float)(-M_PI/2.),glm::vec3(1.f,0.f,0.0f));
     model=glm::scale(model,glm::vec3(20.f,20.f,20.f));
     applyModelViewProjection();
+    square1.bind();
     square1.draw();
 
+    
     
 
     

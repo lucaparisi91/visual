@@ -12,4 +12,7 @@ unsigned int generateElementArray3D(vector<unsigned int> &vertices);
 
 void changeDataBufferArray(unsigned int i,vector<float> & colors);
 unsigned int generateBufferVertex2D(vector<float> &vertices,int i);
+
+#include "errorTools.h"
+
 #endif

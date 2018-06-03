@@ -1,4 +1,5 @@
 #include "shapes.h"
+#include "errorTools.h"
 
 void shape::setVertices(vector<float> & vertices_)
 {
@@ -48,53 +49,55 @@ void shape::setColor(float rCol,float gCol,float bCol)
 
 void shape::draw()
 {
-  bind();
+  
   makeDrawing();
 }
 
-void textureShape::setTexture(texture & textureObject,vector<float> & texCoords_)
+void textureShape::setTexture(texture & textureObject_,vector<float> & texCoords_)
 {
   texCoords=texCoords_;
   glBindVertexArray(getIndexVertex());
-  textureBufferId=generateBufferVertex3D(texCoords,3);
-  glBindVertexArray(getIndexVertex());
-  
   textureBufferId=generateBufferVertex2D(texCoords,3);
-  
+  setTex=true;
+  textureObject=&textureObject_;
 }
 
 void shape::bind()
 {
-  glBindVertexArray(VAOS);
-  glBindBuffer(GL_ARRAY_BUFFER,VBCS);
-  glBindBuffer(GL_ARRAY_BUFFER,VBN);
   
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBOS);
+  glBindVertexArray(VAOS);
   
 }
 
 void textureShape::bind()
 {
+  
   shape::bind();
   if (setTex)
     {
-    
+      
       glBindBuffer(GL_ARRAY_BUFFER,textureBufferId);
       glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, textureObject->getId());
+      
+      textureObject->bind();
+      
     }
+
+  
 }
 
 void shape::makeDrawing()
 {
   glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+  
+
+ 
 }
 
 void textureShape::draw()
 {
-  bind();
+  
   makeDrawing();
   
-  
-  
+    
 }

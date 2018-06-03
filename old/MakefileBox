@@ -1,0 +1,12 @@
+GLAD_HEADER_DIR=~/software/glad/include
+GLFW_HEADER_DIR=~/software/glfw/include
+GLFW_LINK_DIR=~/software/glfw/lib
+GLM_HEADER_DIR=~/software/glm
+CFLAGS= -I $(GLFW_HEADER_DIR) -I $(GLAD_HEADER_DIR) -I $(GLM_HEADER_DIR) 
+LFLAGS= -L $(GLFW_LINK_DIR) -lglfw3 -lGL -lX11 -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor -lpthread  -lrt -lm  -ldl
+
+all:
+	g++ test.cpp glad.c shader.cpp camera.cpp stb.cpp  $(LFLAGS) $(CFLAGS) -o test
+clean:
+	rm -f *.o
+

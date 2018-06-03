@@ -48,6 +48,7 @@ public:
   
   camera(glm::vec3 cameraPos_,glm::vec3 cameraFront_,glm::vec3 cameraUp_)
   {
+    identity=glm::mat4(1.0f);
     cameraPos=cameraPos_;
     cameraFront=glm::normalize(cameraFront_);
     eulerDirection(cameraFront,Yaw,Pitch);

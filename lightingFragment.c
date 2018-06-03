@@ -11,6 +11,7 @@ uniform float ambientStrength;
 uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 
+uniform bool isTextured;
 uniform sampler2D textureSampler;
 
 void main()
@@ -28,8 +29,14 @@ void main()
   vec3 reflectDir=reflect(-lightDir,normal);
   float spec = pow(max(dot(viewDir, reflectDir), 0.0), 42);
   vec3 specular = specularStrength * spec * lightColor;  
-  
-  FragColor=vec4(colorPos*(ambient+diffuse+specular),1);
-  //FragColor=vec4(colorPos*(ambient+diffuse+specular),1)*texture(textureSampler,texCoord);
+  if (isTextured)
+    {
+      FragColor=vec4(colorPos*(ambient+diffuse+specular),1)*texture(textureSampler,texCoord);
+      
+    }
+  else
+    {
+      FragColor=vec4(colorPos*(ambient+diffuse+specular),1);
+    }
   
 }

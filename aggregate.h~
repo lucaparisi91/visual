@@ -1,0 +1,13 @@
+class aggregate
+{
+  
+  aggregate(shape &shape_,texture& texture_):shapeO(shape_),textureO(textureO){};
+  addShape( shapeO * shape){shapeO=&shape;}
+  addTexture( textureO * shape){shapeO=&shape;}
+  void bind(){shapeO->bind();textureO->bind();}
+  void draw(){bind.;shapeO.draw();}
+private:
+  shape *shapeO;
+  texture *textureO;
+  
+}

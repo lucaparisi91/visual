@@ -34,7 +34,7 @@ private:
   vector<float> colors;
   vector<unsigned int> indices;
   vector<float> normals;
-
+  
   unsigned int VAOS;
   unsigned int VBOS;
   unsigned int VBCS;
@@ -46,6 +46,7 @@ private:
 class textureShape : public shape
 {
 public:
+  textureShape() : shape() {setTex=false;}
   virtual bool isTexture(){return true;};
   void setTexture(texture & textureObject,vector<float> & texCoords_);
   bool isTexture() const

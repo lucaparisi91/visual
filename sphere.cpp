@@ -80,6 +80,7 @@ sphere::sphere(unsigned int radialSubDivisions_,unsigned int zSubDivisions_)
     setIndices(indices);
     setColors(colors);
     setNormals(normals);
+    
   }
 
 /*
@@ -120,7 +121,7 @@ void sphere::draw()
 
 void sphere::setTexture(texture& textureObject_)
 {
- 
+  
   textureObject=&textureObject_;
   vector<float> & normals=getNormals();
   texCoords.resize(normals.size()/3*2);
